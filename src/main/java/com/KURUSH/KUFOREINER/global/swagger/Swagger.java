@@ -35,8 +35,8 @@ public class Swagger {
     // Swagger 기본 정보 설정
     private Info apiInfo() {
         return new Info()
-                .title("직짱건강")
-                .description("zigzzang API 명세서 입니다.")
+                .title("KUIT 헤커톤 꼬물가이드 ")
+                .description("건대 유학생을 위한 꼬물가이드 API 명세서 입니다.")
                 .version("1.0.0");
     }
 }
