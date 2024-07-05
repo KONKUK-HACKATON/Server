@@ -3,8 +3,10 @@ package com.KURUSH.KUFOREINER.member.service;
 import com.KURUSH.KUFOREINER.global.security.JWTUtil;
 import com.KURUSH.KUFOREINER.member.MemberRepository;
 import com.KURUSH.KUFOREINER.member.domain.Member;
+import com.KURUSH.KUFOREINER.member.dto.MemberDTO;
 import com.KURUSH.KUFOREINER.member.dto.MemberInitialSettingsDTO;
 import com.KURUSH.KUFOREINER.member.dto.MemberJoinRequest;
+import com.KURUSH.KUFOREINER.member.exception.MemberNotExistException;
 import com.KURUSH.KUFOREINER.member.exception.NickNameAlreadyExistException;
 import com.KURUSH.KUFOREINER.member.exception.UserIdAlreadyExistException;
 import jakarta.transaction.Transactional;
@@ -58,6 +60,23 @@ public class MemberService {
 
         memberRepository.save(member);
         return settingsDTO;
+    }
+    public MemberDTO getMemberInfo() {
+        String userId = getUsernameBySecurityContext();
+        Member member = memberRepository.findByUserId(userId)
+                .orElseThrow(() -> new MemberNotExistException());
+
+        return MemberDTO.builder()
+                .memberId(member.getMemberId())
+                .userId(member.getUserId())
+                .nickname(member.getNickname())
+                .colleage(member.getColleage())
+                .major(member.getMajor())
+                .studentnumber(member.getStudentnumber())
+                .nation(member.getNation())
+                .language(member.getLanguage())
+                .singularity(member.getSingularity())
+                .build();
     }
     public String getUsernameBySecurityContext() {
         return SecurityContextHolder.getContext().getAuthentication()
