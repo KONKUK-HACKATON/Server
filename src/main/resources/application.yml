@@ -1,0 +1,51 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    driver-class-name: ${DB_DRIVER}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+        format_sql: true
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  jwt:
+    secret : ${jwt_secret}
+
+  data:
+    redis:
+      host: ${redis_host}
+      port: ${redis_port}
+      password : ${redis_password}
+  servlet:
+    multipart:
+      maxFileSize: 30MB
+      maxRequestSize: 60MB
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false
+
+logging:
+  level:
+    org.hibernate.SQL: error
+
+cloud:
+  aws:
+    credentials:
+      accessKey: ${s3_accesskey}
+      secretKey: ${s3_secretkey}
+    s3:
+      bucketName: ${s3_bucketname}
+    cloudfront:
+      domainName: ${cloudfront_name}
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
