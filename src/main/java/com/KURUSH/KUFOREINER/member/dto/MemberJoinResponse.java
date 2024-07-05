@@ -5,13 +5,14 @@ import lombok.Builder;
 
 @Builder
 public record MemberJoinResponse(
-        String surveyUrl,String message
+        Long memberId,String message
 
 
 ) {
 
     public static MemberJoinResponse of(Member member) {
         return MemberJoinResponse.builder()
+                .memberId(member.getMemberId())
                 .message(member.getNickname()+"님 회원가입을 축하합니다 !")
                 .build();
 

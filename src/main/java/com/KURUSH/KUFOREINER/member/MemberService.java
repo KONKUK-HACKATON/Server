@@ -1,16 +1,14 @@
 package com.KURUSH.KUFOREINER.member;
 
-import com.KURUSH.KUFOREINER.global.exception.HttpExceptionCode;
 import com.KURUSH.KUFOREINER.global.security.JWTUtil;
 import com.KURUSH.KUFOREINER.member.domain.Member;
+import com.KURUSH.KUFOREINER.member.dto.MemberInitialSettingsDTO;
 import com.KURUSH.KUFOREINER.member.dto.MemberJoinRequest;
-import com.KURUSH.KUFOREINER.member.exception.MemberExistException;
 import com.KURUSH.KUFOREINER.member.exception.NickNameAlreadyExistException;
 import com.KURUSH.KUFOREINER.member.exception.UserIdAlreadyExistException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -43,6 +41,21 @@ public class MemberService {
         Member savedmember = memberRepository.save(member);
 
         return savedmember;
+    }
+    public MemberInitialSettingsDTO updateInitialSettings(MemberInitialSettingsDTO settingsDTO) {
+        Member member = memberRepository.findById(settingsDTO.getMemberId())
+
+                .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + settingsDTO.getMemberId()));
+
+        member.setColleage(settingsDTO.getColleage());
+        member.setMajor(settingsDTO.getMajor());
+        member.setStudentnumber(settingsDTO.getStudentNumber());
+        member.setNation(settingsDTO.getNation());
+        member.setLanguage(settingsDTO.getLanguage());
+        member.setSingularity(settingsDTO.getSingularity());
+
+        memberRepository.save(member);
+        return settingsDTO;
     }
 
 }
