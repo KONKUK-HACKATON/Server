@@ -3,6 +3,7 @@ package com.KURUSH.KUFOREINER.member.controller;
 import com.KURUSH.KUFOREINER.global.response.HttpResponse;
 import com.KURUSH.KUFOREINER.global.security.JWTUtil;
 import com.KURUSH.KUFOREINER.member.MemberRepository;
+import com.KURUSH.KUFOREINER.member.dto.MemberDTO;
 import com.KURUSH.KUFOREINER.member.service.MemberService;
 import com.KURUSH.KUFOREINER.member.domain.Member;
 import com.KURUSH.KUFOREINER.member.dto.MemberInitialSettingsDTO;
@@ -13,6 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +47,12 @@ public class MemberController {
         return HttpResponse.okBuild(
                 MemberInitialSettingsResponse.of(savedSettings, "초기설정이 성공적으로 마무리되었습니다.")
         );
+    }
+    @GetMapping("/users")
+    @Operation(summary ="내정보 확인", description = "현재 로그인한 사용자의 정보를 확인합니다.")
+    public HttpResponse<MemberDTO> getMemberInfo() {
+        MemberDTO memberDTO = memberService.getMemberInfo();
+        return HttpResponse.okBuild(memberDTO);
     }
 
 
