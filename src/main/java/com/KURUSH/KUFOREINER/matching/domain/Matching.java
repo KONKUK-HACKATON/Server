@@ -38,7 +38,7 @@ public class Matching {
     private String gender;
 
     @Column(nullable = true)
-    private String colleage;
+    private String college;
 
 
     @Column(nullable = true)

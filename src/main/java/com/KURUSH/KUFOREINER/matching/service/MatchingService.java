@@ -44,7 +44,7 @@ public class MatchingService {
                 .nickname(request.getNickname())
                 .nation(request.getNation())
                 .gender(request.getGender())
-                .colleage(request.getColleage())
+                .college(request.getCollege())
                 .major(request.getMajor())
                 .member(member)
                 .build();
@@ -57,7 +57,7 @@ public class MatchingService {
                 .nickname(matching.getNickname())
                 .nation(matching.getNation())
                 .gender(matching.getGender())
-                .colleage(matching.getColleage())
+                .college(matching.getCollege())
                 .major(matching.getMajor())
                 .memberId(matching.getMember().getMemberId())
                 .build();

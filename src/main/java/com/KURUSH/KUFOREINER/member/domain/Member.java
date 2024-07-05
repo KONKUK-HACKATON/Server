@@ -42,7 +42,7 @@ public class Member {
     private String nickname;
 
     @Column(nullable = true)
-    private String colleage;
+    private String college;
 
     @Column(nullable = true)
     private String major;

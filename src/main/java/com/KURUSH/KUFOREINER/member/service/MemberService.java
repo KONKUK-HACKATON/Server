@@ -51,7 +51,7 @@ public class MemberService {
 
                 .orElseThrow(() -> new IllegalArgumentException("Member not found with id: " + settingsDTO.getMemberId()));
 
-        member.setColleage(settingsDTO.getColleage());
+        member.setCollege(settingsDTO.getColleage());
         member.setMajor(settingsDTO.getMajor());
         member.setStudentnumber(settingsDTO.getStudentNumber());
         member.setNation(settingsDTO.getNation());
@@ -70,7 +70,7 @@ public class MemberService {
                 .memberId(member.getMemberId())
                 .userId(member.getUserId())
                 .nickname(member.getNickname())
-                .colleage(member.getColleage())
+                .colleage(member.getCollege())
                 .major(member.getMajor())
                 .studentnumber(member.getStudentnumber())
                 .nation(member.getNation())

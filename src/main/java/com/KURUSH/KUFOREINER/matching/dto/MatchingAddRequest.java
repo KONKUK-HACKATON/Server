@@ -11,6 +11,6 @@ public class MatchingAddRequest {
     private String nickname;
     private String nation;
     private String gender;
-    private String colleage;
+    private String college;
     private String major;
 }
