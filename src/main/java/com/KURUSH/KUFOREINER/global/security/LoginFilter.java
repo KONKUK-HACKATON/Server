@@ -52,7 +52,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             LoginRequest loginRequest = objectMapper.readValue(request.getInputStream(), LoginRequest.class);
 
 
-            String username = loginRequest.username();
+            String username = loginRequest.userId();
             String password = loginRequest.password();
             logger.info("추출한 username : "+username);
             logger.info("추출한 비밀번호 : " + password);
@@ -79,7 +79,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String password = customUserDetails.getPassword();
         //AT : 6분
-        String accessToken = jwtUtil.createJwt(username, password, 60*60*1000L);
+        String accessToken = jwtUtil.createJwt(username, password, 60*60*10000L);
         //RT : 7일
         String refreshToken = jwtUtil.createRefreshToken(username, password, 86400000*7L);
 

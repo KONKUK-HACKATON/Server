@@ -41,19 +41,19 @@ public class Member {
     @Column(nullable = false)
     private String nickname;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String colleage;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String major;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long studentnumber;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String nation;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String language;
 
     @Column
