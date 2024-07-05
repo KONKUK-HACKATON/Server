@@ -12,7 +12,7 @@ public class MatchingReadResponse {
     private String nickname;
     private String nation;
     private String gender;
-    private String colleage;
+    private String college;
     private String major;
     private Long memberId; // Adding memberId for reference
 }

@@ -85,7 +85,7 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/members/join","api/members/refresh","/login","api/members/logout").permitAll()
                         .requestMatchers("/api/members/find-id","api/members/find-password","/userinfo","/","/index.html").permitAll()
-                        .requestMatchers("/api/emails/verification-requests","api/emails/verifications").permitAll()
+                        .requestMatchers("/api/emails/verification-requests","api/emails/verifications","/api/members/initial-settings").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/hospitals").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/hospitals/*").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()

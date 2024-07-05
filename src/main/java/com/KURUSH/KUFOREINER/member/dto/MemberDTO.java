@@ -17,7 +17,7 @@ public class MemberDTO {
     private String nickname;
     private String colleage;
     private String major;
-    private Long studentnumber;
+    private String studentnumber;
     private String nation;
     private String language;
     private String singularity;

@@ -9,7 +9,7 @@ public class MemberInitialSettingsDTO {
     private Long memberId;
     private String colleage;
     private String major;
-    private Long studentNumber;
+    private String studentNumber;
     private String nation;
     private String language;
     private String singularity;

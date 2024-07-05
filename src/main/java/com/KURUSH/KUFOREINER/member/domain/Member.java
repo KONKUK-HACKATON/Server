@@ -42,13 +42,13 @@ public class Member {
     private String nickname;
 
     @Column(nullable = true)
-    private String colleage;
+    private String college;
 
     @Column(nullable = true)
     private String major;
 
     @Column(nullable = true)
-    private Long studentnumber;
+    private String studentnumber;
 
     @Column(nullable = true)
     private String nation;
