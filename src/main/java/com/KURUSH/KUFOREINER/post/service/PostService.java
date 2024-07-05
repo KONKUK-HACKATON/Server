@@ -90,6 +90,22 @@ public class PostService {
 
         postRepository.save(post);
     }
+
+    public void deletePost(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post not found with id: " + postId));
+
+        String loggedInUsername = getUsernameBySecurityContext();
+        Member loggedInMember = memberRepository.findByUserId(loggedInUsername)
+                .orElseThrow(MemberNotExistException::new);
+
+        if (!post.getMember().getUserId().equals(loggedInMember.getUserId())) {
+            throw new RuntimeException("You are not authorized to delete this post.");
+        }
+
+        postRepository.delete(post);
+    }
+
     public String getUsernameBySecurityContext() {
         return SecurityContextHolder.getContext().getAuthentication()
                 .getName();

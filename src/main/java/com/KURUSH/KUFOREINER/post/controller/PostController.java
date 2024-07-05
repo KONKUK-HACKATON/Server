@@ -72,6 +72,12 @@ public class PostController {
         return HttpResponse.okBuild("Post created successfully");
     }
 
+    @DeleteMapping("/{postId}")
+    public HttpResponse<String> deletePost(@PathVariable Long postId) {
+        postService.deletePost(postId);
+        return HttpResponse.okBuild("Post deleted successfully");
+    }
+
     private boolean isInfoPost(String category) {
         return "info".equalsIgnoreCase(category);
     }
