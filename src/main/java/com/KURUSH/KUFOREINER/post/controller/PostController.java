@@ -4,7 +4,7 @@ import com.KURUSH.KUFOREINER.global.response.HttpResponse;
 import com.KURUSH.KUFOREINER.post.dto.InfoPostCreateRequest;
 import com.KURUSH.KUFOREINER.post.dto.MatchingPostCreateRequest;
 import com.KURUSH.KUFOREINER.post.dto.PostReadResponse;
-import com.KURUSH.KUFOREINER.post.PostService;
+import com.KURUSH.KUFOREINER.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

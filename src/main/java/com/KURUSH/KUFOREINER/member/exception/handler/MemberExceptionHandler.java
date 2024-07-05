@@ -3,6 +3,7 @@ package com.KURUSH.KUFOREINER.member.exception.handler;
 
 import com.KURUSH.KUFOREINER.global.response.ErrorResponse;
 import com.KURUSH.KUFOREINER.member.exception.MemberExistException;
+import com.KURUSH.KUFOREINER.member.exception.MemberNotExistException;
 import com.KURUSH.KUFOREINER.member.exception.UserIdAlreadyExistException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -32,5 +33,11 @@ public class MemberExceptionHandler {
                 .body(ErrorResponse.from(e.getHttpStatus(), e.getMessage()));
     }
 
+    @ExceptionHandler(MemberNotExistException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<ErrorResponse> memberNOTExistExceptionHandler(MemberNotExistException e) {
+        return ResponseEntity.status(e.getHttpStatus())
+                .body(ErrorResponse.from(e.getHttpStatus(), e.getMessage()));
+    }
 
 }

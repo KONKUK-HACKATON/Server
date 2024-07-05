@@ -1,6 +1,7 @@
-package com.KURUSH.KUFOREINER.member;
+package com.KURUSH.KUFOREINER.member.service;
 
 import com.KURUSH.KUFOREINER.global.security.JWTUtil;
+import com.KURUSH.KUFOREINER.member.MemberRepository;
 import com.KURUSH.KUFOREINER.member.domain.Member;
 import com.KURUSH.KUFOREINER.member.dto.MemberInitialSettingsDTO;
 import com.KURUSH.KUFOREINER.member.dto.MemberJoinRequest;
@@ -9,6 +10,7 @@ import com.KURUSH.KUFOREINER.member.exception.UserIdAlreadyExistException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 
@@ -56,6 +58,10 @@ public class MemberService {
 
         memberRepository.save(member);
         return settingsDTO;
+    }
+    public String getUsernameBySecurityContext() {
+        return SecurityContextHolder.getContext().getAuthentication()
+                .getName();
     }
 
 }

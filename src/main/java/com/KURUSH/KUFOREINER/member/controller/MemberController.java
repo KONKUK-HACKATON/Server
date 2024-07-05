@@ -3,7 +3,7 @@ package com.KURUSH.KUFOREINER.member.controller;
 import com.KURUSH.KUFOREINER.global.response.HttpResponse;
 import com.KURUSH.KUFOREINER.global.security.JWTUtil;
 import com.KURUSH.KUFOREINER.member.MemberRepository;
-import com.KURUSH.KUFOREINER.member.MemberService;
+import com.KURUSH.KUFOREINER.member.service.MemberService;
 import com.KURUSH.KUFOREINER.member.domain.Member;
 import com.KURUSH.KUFOREINER.member.dto.MemberInitialSettingsDTO;
 import com.KURUSH.KUFOREINER.member.dto.MemberInitialSettingsResponse;
