@@ -1,6 +1,8 @@
 package com.KURUSH.KUFOREINER.post;
 
 import com.KURUSH.KUFOREINER.post.domain.Post;
+import com.KURUSH.KUFOREINER.post.dto.InfoPostCreateRequest;
+import com.KURUSH.KUFOREINER.post.dto.MatchingPostCreateRequest;
 import com.KURUSH.KUFOREINER.post.dto.PostReadResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,4 +51,29 @@ public class PostService {
 //                        .build())
                 .build();
     }
+
+    public void createMatchingPost(MatchingPostCreateRequest request) {
+        Post post = Post.builder()
+                .nickname(request.getNickname())
+                .title(request.getTitle())
+                .content(request.getContent())
+                .category(request.getCategory())
+                .isOpen(request.getIsOpen())
+                .isInfo(request.getIsInfo() != null ? request.getIsInfo() : false)
+                .build();
+
+        postRepository.save(post);
+    }
+
+    public void createInfoPost(InfoPostCreateRequest request) {
+        Post post = Post.builder()
+                .nickname(request.getNickname())
+                .title(request.getTitle())
+                .content(request.getContent())
+                .isInfo(true) // Information board posts are always info
+                .build();
+
+        postRepository.save(post);
+    }
+
 }

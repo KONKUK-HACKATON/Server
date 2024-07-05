@@ -1,14 +1,13 @@
 package com.KURUSH.KUFOREINER.post.controller;
 
 import com.KURUSH.KUFOREINER.global.response.HttpResponse;
+import com.KURUSH.KUFOREINER.post.dto.InfoPostCreateRequest;
+import com.KURUSH.KUFOREINER.post.dto.MatchingPostCreateRequest;
 import com.KURUSH.KUFOREINER.post.dto.PostReadResponse;
 import com.KURUSH.KUFOREINER.post.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -54,4 +53,27 @@ public class PostController {
         PostReadResponse postDetail = postService.getPostById(postId);
         return HttpResponse.okBuild(postDetail);
     }
+
+    @PostMapping("/create")
+    public HttpResponse<String> createPost(@RequestBody MatchingPostCreateRequest request) {
+        // Determine if it's an info post or regular post
+        if (isInfoPost(request.getCategory())) {
+            InfoPostCreateRequest infoRequest = InfoPostCreateRequest.builder()
+                    .nickname(request.getNickname())
+                    .title(request.getTitle())
+                    .content(request.getContent())
+                    .build();
+
+            postService.createInfoPost(infoRequest);
+        } else {
+            postService.createMatchingPost(request);
+        }
+
+        return HttpResponse.okBuild("Post created successfully");
+    }
+
+    private boolean isInfoPost(String category) {
+        return "info".equalsIgnoreCase(category);
+    }
+
 }
