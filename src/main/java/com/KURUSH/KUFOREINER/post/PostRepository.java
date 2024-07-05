@@ -1,6 +1,7 @@
 package com.KURUSH.KUFOREINER.post;
 
 
+import com.KURUSH.KUFOREINER.post.domain.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

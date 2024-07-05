@@ -1,4 +1,4 @@
-package com.KURUSH.KUFOREINER.post;
+package com.KURUSH.KUFOREINER.post.dto;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostDTO {
+public class PostReadResponse {
     private Long postId;
     private String nickname;
     private String title;

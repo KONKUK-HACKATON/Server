@@ -1,4 +1,4 @@
-package com.KURUSH.KUFOREINER.post;
+package com.KURUSH.KUFOREINER.post.domain;
 
 
 import com.KURUSH.KUFOREINER.bookmark.Bookmark;
@@ -33,22 +33,22 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String nickname;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String content;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Boolean isOpen;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Boolean isInfo;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String category;
 
     @ManyToOne
