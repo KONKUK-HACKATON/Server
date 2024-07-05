@@ -3,7 +3,7 @@ package com.KURUSH.KUFOREINER.post;
 
 import com.KURUSH.KUFOREINER.bookmark.Bookmark;
 import com.KURUSH.KUFOREINER.comment.Comment;
-import com.KURUSH.KUFOREINER.member.Member;
+import com.KURUSH.KUFOREINER.member.domain.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

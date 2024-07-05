@@ -1,4 +1,4 @@
-package com.KURUSH.KUFOREINER.member;
+package com.KURUSH.KUFOREINER.member.domain;
 
 
 import com.KURUSH.KUFOREINER.bookmark.Bookmark;

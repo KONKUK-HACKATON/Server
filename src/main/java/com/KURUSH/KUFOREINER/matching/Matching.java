@@ -1,6 +1,6 @@
 package com.KURUSH.KUFOREINER.matching;
 
-import com.KURUSH.KUFOREINER.member.Member;
+import com.KURUSH.KUFOREINER.member.domain.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
