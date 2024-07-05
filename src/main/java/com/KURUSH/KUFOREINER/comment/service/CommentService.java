@@ -9,7 +9,9 @@ import com.KURUSH.KUFOREINER.member.domain.Member;
 import com.KURUSH.KUFOREINER.member.exception.MemberNotExistException;
 import com.KURUSH.KUFOREINER.post.PostRepository;
 import com.KURUSH.KUFOREINER.post.domain.Post;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -45,6 +47,12 @@ public class CommentService {
 
         Comment savedComment = commentRepository.save(comment);
         return CommentResponseDTO.fromEntity(savedComment);
+    }
+    public List<CommentResponseDTO> getCommentsByPostId(Long postId) {
+        List<Comment> comments = commentRepository.findByPostPostId(postId);
+        return comments.stream()
+                .map(CommentResponseDTO::fromEntity)
+                .collect(Collectors.toList());
     }
     public String getUsernameBySecurityContext() {
         return SecurityContextHolder.getContext().getAuthentication()
