@@ -39,7 +39,7 @@ public class Post {
     @Column(nullable = true)
     private String title;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 1000)
     private String content;
 
     @Column(nullable = true)
