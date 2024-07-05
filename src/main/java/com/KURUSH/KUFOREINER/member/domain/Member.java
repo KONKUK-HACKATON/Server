@@ -48,7 +48,7 @@ public class Member {
     private String major;
 
     @Column(nullable = true)
-    private Long studentnumber;
+    private String studentnumber;
 
     @Column(nullable = true)
     private String nation;
