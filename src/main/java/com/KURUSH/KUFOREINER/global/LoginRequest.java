@@ -1,4 +1,4 @@
-package com.KURUSH.KUFOREINER.global.dto;
+package com.KURUSH.KUFOREINER.global;
 
 import lombok.Builder;
 

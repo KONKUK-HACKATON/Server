@@ -1,6 +1,6 @@
 package com.KURUSH.KUFOREINER.comment;
 
-import com.KURUSH.KUFOREINER.member.Member;
+import com.KURUSH.KUFOREINER.member.domain.Member;
 import com.KURUSH.KUFOREINER.post.Post;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

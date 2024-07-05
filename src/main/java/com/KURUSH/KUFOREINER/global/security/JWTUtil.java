@@ -1,6 +1,5 @@
 package com.KURUSH.KUFOREINER.global.security;
 
-
 import com.KURUSH.KUFOREINER.global.exception.HttpExceptionCode;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
@@ -25,28 +24,30 @@ public class JWTUtil {
     public static final String REFRESH_HEADER = "RefreshToken";
     public static final String BEARER_PREFIX = "Bearer ";
 
-
     private SecretKey secretKey;
 
-    public JWTUtil(@Value("${spring.jwt.secret}")String secret) {
+    public JWTUtil(@Value("${spring.jwt.secret}") String secret) {
 
-
-        secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
+        secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8),
+                Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
     public String getUserId(String token) {
 
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("userid", String.class);
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload()
+                .get("userid", String.class);
     }
 
     public String getPassword(String token) {
 
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("password", String.class);
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload()
+                .get("password", String.class);
     }
 
     public Boolean isExpired(String token) {
 
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration()
+                .before(new Date());
     }
 
     public String createJwt(String userid, String password, Long expiredMs) {
@@ -59,8 +60,8 @@ public class JWTUtil {
                 .signWith(secretKey)
                 .compact();
     }
-    public String createRefreshToken(String userid, String password, Long expiredMs) {
 
+    public String createRefreshToken(String userid, String password, Long expiredMs) {
 
         String refreshToken = Jwts.builder()
                 .claim("userid", userid)
@@ -70,21 +71,14 @@ public class JWTUtil {
                 .signWith(secretKey)
                 .compact();
 
-
-
         return refreshToken;
     }
-    // Request Header에 Access Token 정보를 추출하는 메서드
-    public String getAccessToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
 
-    public String getRefreshToken(String bearerToken) {
 
+
+    // Request Header에 Refresh Token 정보를 추출하는 메서드
+    public String getRefreshToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader(REFRESH_HEADER);
         if (StringUtils.hasText(bearerToken)) {
             return bearerToken.substring(7);
         }
@@ -114,7 +108,4 @@ public class JWTUtil {
         String token = authorization.split(" ")[1];
         return token;
     }
-
-
-
 }

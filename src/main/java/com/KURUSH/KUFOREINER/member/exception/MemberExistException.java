@@ -1,4 +1,4 @@
-package com.KURUSH.KUFOREINER.global.exception.custom.security;
+package com.KURUSH.KUFOREINER.member.exception;
 
 import com.KURUSH.KUFOREINER.global.exception.HttpExceptionCode;
 import lombok.Getter;
@@ -9,16 +9,17 @@ import org.springframework.http.HttpStatus;
 @Getter
 @Setter
 @Slf4j
-public class RefreshTokenNotFoundException extends RuntimeException{
+public class MemberExistException extends RuntimeException{
     private final HttpStatus httpStatus;
 
-    public RefreshTokenNotFoundException(HttpExceptionCode exceptionCode) {
+    public MemberExistException(HttpExceptionCode exceptionCode) {
         super(exceptionCode.getMessage());
         this.httpStatus = exceptionCode.getHttpStatus();
     }
 
-    public RefreshTokenNotFoundException() {
-        this(HttpExceptionCode.REFRESH_TOKEN_NOT_FOUND);
+    public MemberExistException() {
+        this(HttpExceptionCode.MEMBER_EXISTS);
     }
+
 
 }

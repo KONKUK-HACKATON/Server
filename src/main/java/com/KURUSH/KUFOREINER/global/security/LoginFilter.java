@@ -1,11 +1,13 @@
 package com.KURUSH.KUFOREINER.global.security;
 
-import com.KURUSH.KUFOREINER.global.dto.LoginRequest;
+import com.KURUSH.KUFOREINER.global.LoginRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,10 +17,10 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
-
     private final AuthenticationManager authenticationManager;
 
     private final JWTUtil jwtUtil;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
@@ -61,6 +63,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
     }
 
     @Override
@@ -75,12 +79,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String password = customUserDetails.getPassword();
         //AT : 6분
-        String accessToken = jwtUtil.createJwt(username, password, 60*60*100L);
+        String accessToken = jwtUtil.createJwt(username, password, 60*60*1000L);
         //RT : 7일
         String refreshToken = jwtUtil.createRefreshToken(username, password, 86400000*7L);
 
-
         sendTokenResponse(response,accessToken,refreshToken);
+        Cookie cookie = createCookie(refreshToken);
+        response.addCookie(cookie);
+
 
     }
 
@@ -89,7 +95,18 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             throws IOException {
 
         setResponse(response, 406,"아이디나 비밀번호가 일치하지 않습니다.");
+    }
+    public Cookie createCookie(String refreshToken) throws UnsupportedEncodingException {
+        String cookieName = "refreshtoken";
+        String cookieValue = refreshToken;
+        Cookie cookie = new Cookie(cookieName, cookieValue);
 
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60 * 24 * 7);
+
+        return cookie;
     }
     private void setResponse(HttpServletResponse response,int status, String message) throws RuntimeException, IOException {
         response.setContentType("application/json;charset=UTF-8");

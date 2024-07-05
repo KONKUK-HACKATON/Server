@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,7 +23,8 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
 
     private final JWTUtil jwtUtil;
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration,JWTUtil jwtUtil) {
+
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil) {
 
         this.authenticationConfiguration = authenticationConfiguration;
         this.jwtUtil = jwtUtil;
@@ -39,12 +41,14 @@ public class SecurityConfig {
 
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         //csrf disable
         http
                 .csrf((auth) -> auth.disable());
+
         //cors 설정
         http
                 .cors((corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
@@ -61,6 +65,7 @@ public class SecurityConfig {
                         configuration.setMaxAge(3600L);
 
                         configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+                        configuration.setExposedHeaders(Collections.singletonList("RefreshToken"));
 
                         return configuration;
                     }
@@ -77,21 +82,22 @@ public class SecurityConfig {
         //경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/users/join","/health","/","/index.html","/users/refresh","/userinfo").permitAll()
-                        .requestMatchers("/users/logout").permitAll()
-                        .requestMatchers("/spot/**").permitAll()
-                        .requestMatchers("/users/find-password","/bookmark/add","/bookmark/delete").permitAll()
-                        .requestMatchers( "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+
+                        .requestMatchers("/api/members/join","api/members/refresh","/login","api/members/logout").permitAll()
+                        .requestMatchers("/api/members/find-id","api/members/find-password","/userinfo","/","/index.html").permitAll()
+                        .requestMatchers("/api/emails/verification-requests","api/emails/verifications").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/hospitals").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/hospitals/*").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         //스웨거 접근권한 허용
                         .anyRequest().authenticated());
 
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
-
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),jwtUtil), UsernamePasswordAuthenticationFilter.class);
-
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil),
+                        UsernamePasswordAuthenticationFilter.class);
 
         //세션 설정
         http

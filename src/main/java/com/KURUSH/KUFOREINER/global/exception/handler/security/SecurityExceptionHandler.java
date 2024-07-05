@@ -1,5 +1,7 @@
 package com.KURUSH.KUFOREINER.global.exception.handler.security;
 
+
+
 import com.KURUSH.KUFOREINER.global.exception.custom.security.IncorrectRefreshTokenException;
 import com.KURUSH.KUFOREINER.global.exception.custom.security.RefreshTokenNotFoundException;
 import com.KURUSH.KUFOREINER.global.exception.custom.security.SecurityJwtNotFoundException;
@@ -25,7 +27,7 @@ public class SecurityExceptionHandler {
                 .body(ErrorResponse.from(e.getHttpStatus(), e.getMessage()));
 
     }
-    @ExceptionHandler(RefreshTokenNotFoundException.class)
+    @ExceptionHandler(RefreshTokenNotFoundException.class)  // 새로운 예외 핸들러 추가
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public HttpResponse<ErrorResponse> refreshTokenNotFoundExceptionHandler(RefreshTokenNotFoundException e) {
         return HttpResponse.status(e.getHttpStatus())
@@ -37,4 +39,5 @@ public class SecurityExceptionHandler {
         return HttpResponse.status(e.getHttpStatus())
                 .body(ErrorResponse.from(e.getHttpStatus(), e.getMessage()));
     }
+
 }

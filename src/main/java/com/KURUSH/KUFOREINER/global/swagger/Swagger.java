@@ -10,14 +10,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
 @RequiredArgsConstructor
 @Configuration
 public class Swagger {
     //http://localhost:8080/swagger-ui/index.html#/
     @Bean
-    public OpenAPI chatOpenApi() {
-// jwt 토큰 설정
+    public OpenAPI openAPI() {
+
+        // jwt 토큰 설정
         SecurityScheme securityScheme = new SecurityScheme()
                 .type(SecurityScheme.Type.HTTP)  // HTTP 기반의 보안 스키마를 사용
                 .scheme("bearer")  // 인증 스키마로 Bearer Token을 사용
@@ -31,10 +31,12 @@ public class Swagger {
                 .components(new Components().addSecuritySchemes("jwt_token", securityScheme))
                 .security(Collections.singletonList(securityRequirement));
     }
+
+    // Swagger 기본 정보 설정
     private Info apiInfo() {
-        return new io.swagger.v3.oas.models.info.Info()
-                .title("쿠석쿠석")
-                .description("쿠석쿠석의 API 명세서 입니다.")
-                .version("1.7.0");
+        return new Info()
+                .title("직짱건강")
+                .description("zigzzang API 명세서 입니다.")
+                .version("1.0.0");
     }
 }

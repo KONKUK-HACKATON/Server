@@ -1,9 +1,9 @@
 package com.KURUSH.KUFOREINER.global.exception.handler;
 
-import com.cona.KUsukKusuk.global.exception.HttpExceptionCode;
-import com.cona.KUsukKusuk.global.exception.custom.BuisnessException.BusinessException;
-import com.cona.KUsukKusuk.global.response.ErrorResponse;
-import com.cona.KUsukKusuk.global.response.HttpResponse;
+import com.KURUSH.KUFOREINER.global.exception.HttpExceptionCode;
+import com.KURUSH.KUFOREINER.global.exception.custom.BuisnessException.BusinessException;
+import com.KURUSH.KUFOREINER.global.response.ErrorResponse;
+import com.KURUSH.KUFOREINER.global.response.HttpResponse;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 @Order(Ordered.LOWEST_PRECEDENCE)
-
 public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -49,5 +48,4 @@ public class GlobalExceptionHandler {
         return HttpResponse.status(HttpStatus.BAD_REQUEST)
                 .body(ErrorResponse.from(HttpExceptionCode.INVALID_ARGUMENT.getHttpStatus(), errorMessage));
     }
-
 }

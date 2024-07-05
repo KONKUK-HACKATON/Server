@@ -1,6 +1,6 @@
 package com.KURUSH.KUFOREINER.bookmark;
 
-import com.KURUSH.KUFOREINER.member.Member;
+import com.KURUSH.KUFOREINER.member.domain.Member;
 import com.KURUSH.KUFOREINER.post.Post;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

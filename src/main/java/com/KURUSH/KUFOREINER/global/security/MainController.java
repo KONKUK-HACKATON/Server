@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class MainController {
     @GetMapping("/userinfo")
-    @Operation
+    @Operation(summary = "사용자 정보 확인", description = "헤더에 jwt가 있을시, 현재 접속자를 확인합니다.")
+
     public String main() {
         String username= SecurityContextHolder.getContext().getAuthentication()
                 .getName();

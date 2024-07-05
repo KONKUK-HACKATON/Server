@@ -1,16 +1,16 @@
 package com.KURUSH.KUFOREINER.global.security;
 
-import com.KURUSH.KUFOREINER.member.Member;
+import com.KURUSH.KUFOREINER.member.domain.Member;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class CustomUserDetails implements UserDetails {
-    private final Member user;
+    private final Member member;
 
-    public CustomUserDetails(Member user) {
+    public CustomUserDetails(Member member) {
 
-        this.user = user;
+        this.member = member;
     }
 
 
@@ -22,13 +22,13 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getPassword() {
 
-        return user.getPassword();
+        return member.getPassword();
     }
 
     @Override
     public String getUsername() {
 
-        return user.getUserId();
+        return member.getUserId();
     }
 
     @Override
