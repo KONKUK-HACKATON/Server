@@ -1,4 +1,4 @@
-package com.KURUSH.KUFOREINER.matching;
+package com.KURUSH.KUFOREINER.matching.domain;
 
 import com.KURUSH.KUFOREINER.member.domain.Member;
 import jakarta.persistence.Column;
