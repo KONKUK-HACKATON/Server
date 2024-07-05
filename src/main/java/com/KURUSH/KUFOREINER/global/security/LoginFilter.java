@@ -34,6 +34,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
+        System.out.println(request.toString());
+
         if (!request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE)) {
             // Content-Type이 "application/x-www-form-urlencoded"인 경우
 
