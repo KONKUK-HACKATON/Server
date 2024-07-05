@@ -1,7 +1,7 @@
 package com.KURUSH.KUFOREINER.bookmark;
 
 import com.KURUSH.KUFOREINER.member.domain.Member;
-import com.KURUSH.KUFOREINER.post.Post;
+import com.KURUSH.KUFOREINER.post.domain.Post;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

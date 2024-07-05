@@ -4,7 +4,7 @@ package com.KURUSH.KUFOREINER.member.domain;
 import com.KURUSH.KUFOREINER.bookmark.Bookmark;
 import com.KURUSH.KUFOREINER.comment.Comment;
 import com.KURUSH.KUFOREINER.matching.Matching;
-import com.KURUSH.KUFOREINER.post.Post;
+import com.KURUSH.KUFOREINER.post.domain.Post;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
