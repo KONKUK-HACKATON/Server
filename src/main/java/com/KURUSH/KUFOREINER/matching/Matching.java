@@ -28,16 +28,20 @@ public class Matching {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matchingId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String nickname;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String nation;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String gender;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
+    private String colleage;
+
+
+    @Column(nullable = true)
     private String major;
 
     @ManyToOne
