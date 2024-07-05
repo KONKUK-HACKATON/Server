@@ -17,16 +17,6 @@ spring:
   jwt:
     secret : ${jwt_secret}
 
-  data:
-    redis:
-      host: ${redis_host}
-      port: ${redis_port}
-      password : ${redis_password}
-  servlet:
-    multipart:
-      maxFileSize: 30MB
-      maxRequestSize: 60MB
-
 decorator:
   datasource:
     p6spy:
@@ -35,17 +25,3 @@ decorator:
 logging:
   level:
     org.hibernate.SQL: error
-
-cloud:
-  aws:
-    credentials:
-      accessKey: ${s3_accesskey}
-      secretKey: ${s3_secretkey}
-    s3:
-      bucketName: ${s3_bucketname}
-    cloudfront:
-      domainName: ${cloudfront_name}
-    region:
-      static: ap-northeast-2
-    stack:
-      auto: false
